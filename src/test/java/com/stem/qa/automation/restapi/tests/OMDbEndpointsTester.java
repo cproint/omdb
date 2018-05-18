@@ -17,32 +17,12 @@ public class OMDbEndpointsTester extends TestUtil {
 		private static String thirdEndpointURL = null;
 
 		@Test(priority = 1, enabled = true, groups = { "sanity", "regression" })		
-		public void testPeopleEndpointBySearchParameter() {
+		public void testSearchMovieDetailsEndpointByIMDBId() {
 			
 			logger.info("Starting Test Case "+ new Exception().getStackTrace()[0].getMethodName());
 			
-			response = givenContentTypeAndAPIKey().params("i", "tt3896198")
-							.when().get(baseURI());
-			
-			System.out.println(response.asString());
-			//validate response code
-			if (response.statusCode() == 200) {
-				//Convert response as json object	
-				jsonObject = new JSONObject(response.asString());
-				//Validate some contents of response object
-				//assertTrue(jsonObject.getInt("count") == 1);
-				//assertTrue(jsonObject.getJSONArray("results").getJSONObject(0).getString("name").equals("R2-D2"));
-				
-				// Extract the chained variables 'secondEndpointURL and thirdEndpointURL' to validate in other Test Cases
-				//secondEndpointURL = jsonObject.getJSONArray("results").getJSONObject(0).getString("homeworld");
-				//thirdEndpointURL = jsonObject.getJSONArray("results").getJSONObject(0).getJSONArray("films").get(0).toString();
-				logger.info("Ending Test Case "+ new Exception().getStackTrace()[0].getMethodName());
-
-			} else {
-				logger.info("Ending Test Case "+ new Exception().getStackTrace()[0].getMethodName());
-				fail("This TestCase is failed with response code: "+ response.statusCode() + " and with error message: " + response.asString());
-			}
-
+			jsonObject = getMovieDetailsByIMDBId("tt3896198");
+			System.out.println(jsonObject.getString("Title"));
 		}
 		
 		@Test(priority = 2, enabled = false, groups = { "sanity" })
