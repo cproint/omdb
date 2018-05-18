@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name = "Shipt WebSite - Test Suite"  verbose="1">
+  
+	<test name="HomePage Feature">
+	    <classes>
+	         <class name="com.shipt.qa.automation.tests.HomePageTest"> </class>
+	    </classes>
+	</test>
+
+	<test name="LoginPage Feature">
+	    <classes>
+	         <class name="com.shipt.qa.automation.tests.LoginPageTest"> </class>
+	    </classes>
+	</test>
+	
+ 	<test name="Forgot Password Feature">
+	    <classes>
+	         <class name="com.shipt.qa.automation.tests.ForgotPasswordPageTest"> </class>
+	    </classes>
+	</test>
+	
+	 	<test name="Rest Endpoints Tests">
+	    <classes>
+	         <class name="com.shipt.qa.automation.restapi.tests.SwapiEndpoints"> </class>
+	    </classes>
+	</test>
+ 	
+</suite>
