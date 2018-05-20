@@ -37,9 +37,12 @@ public class OMDbEndpointsTester extends TestUtil {
 		@Test(priority = 2, enabled = true)		
 		public void testMovieDetailsByOMDBId() {
 			String movieId;
+
 			logger.info("***starting test case "+ new Exception().getStackTrace()[0].getMethodName());			
+
 			movieId = (String) getMovieIdFromTitle(searchMovieDetailsByTitle("stem"),"Activision: STEM - in the Videogame Industry");
 			jsonObject = getMovieDetailsByIMDbId(movieId);
+
 			assertTrue(jsonObject.getString("Released").equals("23 Nov 2010"));
 			assertTrue(jsonObject.getString("Director").equals("Mike Feurstein"));
 
@@ -57,8 +60,10 @@ public class OMDbEndpointsTester extends TestUtil {
 			logger.info("***starting test case "+ new Exception().getStackTrace()[0].getMethodName());
 			
 			response = getMovieDetailsByTitle("The STEM Journals");
+
 			assertTrue(response.asString().contains("Science, Technology, Engineering and Math"));
 			assertTrue(new JSONObject(response.asString()).getString("Runtime").equals("22 min"));
+	
 			logger.info("***completed test case "+ new Exception().getStackTrace()[0].getMethodName());
 
 		}
