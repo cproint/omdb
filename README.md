@@ -1,6 +1,4 @@
-# ombd public repo contains rest endpoint tests that are designed soley to use/evaluate for Test Automation Engineer interview. 
-
-*copyright: Under NO circumstances should this framework/repo be used as production test code by any company without written consent of Murali Tulugu*
+* ombd public repo contains rest endpoint tests that are designed soley to use/evaluate for Test Automation Engineer interview. *
 
 *A. Tech Stack*
 
