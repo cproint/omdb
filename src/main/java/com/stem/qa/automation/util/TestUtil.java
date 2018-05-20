@@ -12,8 +12,6 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import org.testng.annotations.Test;
-
 import com.stem.qa.automation.base.TestBase;
 
 /**
@@ -28,32 +26,27 @@ public class TestUtil extends TestBase {
     protected static JSONArray jsonArray;
     protected static Response response;
     
-    static int totalResultsPerPage = 10;
-	static int totalResults = 0;
-	static int totalPages = 0;
+    static int totalResultsPerPage;
+	static int totalResults;
+	static int totalPages;
 
 	static String movieTitle;
 	static String movieId;
-	static Map<String, String> hmap = new HashMap<String, String>();
+	static Map<String, String> hmap = new HashMap<>();
 
-	
-		public static RequestSpecification givenContentTypeAndAPIKey(){
-	        if (request == null) {
-	            request = given().contentType("application/json").param("apikey", getAPIKey());
-	        }
-	        return request;
-	    }
-	  
-
-
-		public static Map<String, String> getAllMovieDetailsByTitleString(String movieTitleSearchString) {
+	// This method copies movie tile and movie id into hash table
+	//Note that key(in this case movie id) is unique
+	public static Map<String, String> searchMovieDetailsByTitle(String movieTitleSearchString) {
 			
-
-			logger.info("Running "+ new Exception().getStackTrace()[0].getMethodName());		
+			logger.info("calling utility method "+ new Exception().getStackTrace()[0].getMethodName());		
 			response = given().contentType("application/json").params("s",movieTitleSearchString).params("apikey",getAPIKey()).when().get(getBaseURI());
-			//validate response code
+			//validates response code
+			//totalResults is total number of records as per search string
+			//totalResultsPerPage - max records shown per page. in this case 10
+			//Logic of if loop determines number of pages 
 			if (response.statusCode() == 200) {
 				totalResults = Integer.parseInt(new JSONObject(response.asString()).getString("totalResults"));
+				totalResultsPerPage = new JSONObject(response.asString()).getJSONArray("Search").length();
 				if (totalResults == 0) {
 					logger.info("No results found");
 					return hmap;
@@ -64,104 +57,83 @@ public class TestUtil extends TestBase {
 				} else {
 					totalPages = totalResults / totalResultsPerPage + 1; 
 				}
-			
+				// Logic of for loop copies all matching movie ids and movie titles
+				for (int i = 1; i <= totalPages; i++) {
+					response = given().contentType("application/json").when().params("page",i).params("s",movieTitleSearchString).params("apikey",getAPIKey()).when().get(getBaseURI());
+					jsonObject = new JSONObject(response.asString());
+					totalResultsPerPage = jsonObject.getJSONArray("Search").length();
 
-				for (int i = 1; i <= totalPages; i++) {	
-						for (int j = 0; j < totalResultsPerPage; j++) {
-							response = given().contentType("application/json").when().params("page",i).params("s",movieTitleSearchString).params("apikey",getAPIKey()).when().get(getBaseURI());
-							jsonObject = new JSONObject(response.asString());
+					for (int j = 0; j < totalResultsPerPage; j++) {
+						movieTitle = jsonObject.getJSONArray("Search").getJSONObject(j).get("Title").toString();
+						movieId = jsonObject.getJSONArray("Search").getJSONObject(j).get("imdbID").toString();
 
-					movieTitle = jsonObject.getJSONArray("Search").getJSONObject(j).get("Title").toString();
-					movieId = jsonObject.getJSONArray("Search").getJSONObject(j).get("imdbID").toString();
+						hmap.put(movieId, movieTitle);
 					
-					if (movieTitle.equals("The STEM Journals") || movieTitle.equals("Activision: STEM - in the Videogame Industry")) {
-					
-						hmap.put(movieTitle, movieId);
-						System.out.println("movieTitle: " + movieTitle);
-						System.out.println("movieId: " + movieId);
-
-						if (hmap.size() == 2) {
-							return hmap;
-						}
-					}
+				}
 				}
 
-				}
-
-			logger.info("Completed: "+ new Exception().getStackTrace()[0].getMethodName());
+			logger.info("completed utility method: "+ new Exception().getStackTrace()[0].getMethodName());
 
 			} else {
-				logger.info("Completed/Failed "+ new Exception().getStackTrace()[0].getMethodName());
-				fail("This method is failed with response code: "+ response.statusCode() + " and with error message: " + response.asString());
+				logger.info("completed/failed utility method with exception: "+ new Exception().getStackTrace()[0].getMethodName());
+				fail("This utility method is failed with response code: "+ response.statusCode() + " and with error message: " + response.asString());
 			}
+			
 			return hmap;
 
 		}
 		
+		//This method gets movie details by movieId and returns JSONObject 
 		public static JSONObject getMovieDetailsByIMDbId(String movieId) {
 			
-			logger.info("Running "+ new Exception().getStackTrace()[0].getMethodName());
+			logger.info("calling utility method "+ new Exception().getStackTrace()[0].getMethodName());		
 			
-			response = givenContentTypeAndAPIKey().params("i", movieId).params("type", "movie").params("r", "json")
+			response = given().contentType("application/json").params("i", movieId).params("type", "movie").params("r", "json").params("apikey",getAPIKey())
 							.when().get(getBaseURI());
 			
 			//validate response code
 			if (response.statusCode() == 200) {
 				//Convert response as json object	
 				jsonObject = new JSONObject(response.asString());
-				//Validate some contents of response object
-				//assertTrue(jsonObject.getInt("count") == 1);
-				//assertTrue(jsonObject.getJSONArray("results").getJSONObject(0).getString("name").equals("R2-D2"));
-				
-				// Extract the chained variables 'secondEndpointURL and thirdEndpointURL' to validate in other Test Cases
-				//secondEndpointURL = jsonObject.getJSONArray("results").getJSONObject(0).getString("homeworld");
-				//thirdEndpointURL = jsonObject.getJSONArray("results").getJSONObject(0).getJSONArray("films").get(0).toString();
-				logger.info("Completed: "+ new Exception().getStackTrace()[0].getMethodName());
+				logger.info("completed utility method: "+ new Exception().getStackTrace()[0].getMethodName());
 
 			} else {
-				logger.info("Completed with Exception: "+ new Exception().getStackTrace()[0].getMethodName());
+				jsonObject = null;
+				logger.info("completed/failed utility method with exception: "+ new Exception().getStackTrace()[0].getMethodName());
 				fail("This method is failed with response code: "+ response.statusCode() + " and with error message: " + response.asString());
 			}
 			return jsonObject;
 
 		}
-
-		public static JSONObject getMovieDetailsByTitle(String movieTitle) {
-			
-			logger.info("Running "+ new Exception().getStackTrace()[0].getMethodName());
-			
-			response = givenContentTypeAndAPIKey().params("t", movieTitle)
-							.when().get(getBaseURI());
-			
-			//validate response code
-			if (response.statusCode() == 200) {
-				//Convert response as json object	
-				jsonObject = new JSONObject(response.asString());
-				//Validate some contents of response object
-				//assertTrue(jsonObject.getInt("count") == 1);
-				//assertTrue(jsonObject.getJSONArray("results").getJSONObject(0).getString("name").equals("R2-D2"));
-				
-				// Extract the chained variables 'secondEndpointURL and thirdEndpointURL' to validate in other Test Cases
-				//secondEndpointURL = jsonObject.getJSONArray("results").getJSONObject(0).getString("homeworld");
-				//thirdEndpointURL = jsonObject.getJSONArray("results").getJSONObject(0).getJSONArray("films").get(0).toString();
-				logger.info("Completed: "+ new Exception().getStackTrace()[0].getMethodName());
-
-			} else {
-				logger.info("Completed with Exception: "+ new Exception().getStackTrace()[0].getMethodName());
-				fail("This method is failed with response code: "+ response.statusCode() + " and with error message: " + response.asString());
-			}
-			return jsonObject;
-
-		}
-
-
-
-
 		
-	    @Test(priority = 1, enabled = true, groups = { "restapi" })
-		public void test()  {
-	    	getAllMovieDetailsByTitleString("stem");
+		//This method gets movie details by title and returns Response object 
+		public static Response getMovieDetailsByTitle(String movieTitle) {
+			
+			logger.info("calling utility method "+ new Exception().getStackTrace()[0].getMethodName());		
+					
+			response = given().contentType("application/json").params("t", movieTitle).params("apikey",getAPIKey())
+							.when().get(getBaseURI());
+			//validate response code
+			if (response.statusCode() == 200) {
+				logger.info("completed utility method: "+ new Exception().getStackTrace()[0].getMethodName());
+
+			} else {
+				response = null;
+				logger.info("completed/failed utility method with exception: "+ new Exception().getStackTrace()[0].getMethodName());
+				fail("This method is failed with response code: "+ response.statusCode() + " and with error message: " + response.asString());
+			}
+			return response;
+
 		}
-	    
+
+		// This is utility method to retun key from value
+		  public static Object getMovieIdFromTitle(Map<?, ?> hm, Object value) {
+			    for (Object o : hm.keySet()) {
+			      if (hm.get(o).equals(value)) {
+			        return o;
+			      }
+			    }
+			    return null;
+		  }
 }
 

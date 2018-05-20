@@ -1,1 +1,18 @@
-2018-05-19 19:20:17 INFO  TestBase:52 - Running getAllMovieDetailsByTitleString
+2018-05-20 00:00:15 INFO  TestBase:25 - ***starting test case testTotalUniqueMoviesAndMovieByTitle
+2018-05-20 00:00:15 INFO  TestBase:41 - calling utility method searchMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:75 - completed utility method: searchMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:41 - calling utility method searchMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:75 - completed utility method: searchMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:41 - calling utility method searchMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:75 - completed utility method: searchMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:31 - ***completed test case testTotalUniqueMoviesAndMovieByTitle
+2018-05-20 00:00:17 INFO  TestBase:40 - ***starting test case testMovieDetailsByOMDBId
+2018-05-20 00:00:17 INFO  TestBase:41 - calling utility method searchMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:75 - completed utility method: searchMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:89 - calling utility method getMovieDetailsByIMDbId
+2018-05-20 00:00:17 INFO  TestBase:98 - completed utility method: getMovieDetailsByIMDbId
+2018-05-20 00:00:17 INFO  TestBase:46 - ***completed test case testMovieDetailsByOMDBId
+2018-05-20 00:00:17 INFO  TestBase:57 - ***starting test case testSearchMovieDetailsEndpointByTitle
+2018-05-20 00:00:17 INFO  TestBase:112 - calling utility method getMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:118 - completed utility method: getMovieDetailsByTitle
+2018-05-20 00:00:17 INFO  TestBase:62 - ***completed test case testSearchMovieDetailsEndpointByTitle

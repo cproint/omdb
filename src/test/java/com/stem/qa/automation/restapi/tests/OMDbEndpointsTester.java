@@ -1,68 +1,65 @@
 package com.stem.qa.automation.restapi.tests;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
-import java.util.ArrayList;
 
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 import com.stem.qa.automation.util.TestUtil;
 
+/**
+ * @author mtulugu
+ *
+ */
+
 public class OMDbEndpointsTester extends TestUtil {
 	
-	
-	ArrayList<String> listOfMovieTitles;
+	/**
+	 * This Test Case verifies unique movie records by Id, verifies if the list contains
+	 * The STEM Journals and Activision: STEM - in the Videogame Industry
+	 */
+		@Test(priority = 1, enabled = true)		
+		public void testTotalUniqueMoviesAndMovieByTitle() {
+			
+			logger.info("***starting test case "+ new Exception().getStackTrace()[0].getMethodName());			
 
-		@Test(priority = 1, enabled = true, groups = { "sanity", "regression" })		
-		public void testAllMovieDetailsByTitleString() {
-			
-			logger.info("Starting Test Case "+ new Exception().getStackTrace()[0].getMethodName());			
-			jsonObject = getAllMovieDetailsByTitleString("water");
-			
-			System.out.println(jsonObject.getJSONArray("Search").getJSONObject(0).get("Title"));
-			
-/*			listOfMovieTitles = response.path("Search");
-			
-			listOfMovieTitles.stream().forEach(System.out::println);
-			
-			jsonObject = new JSONObject(response.asString());
+			assertEquals(searchMovieDetailsByTitle("stem").size(),30);
+		    assertTrue(searchMovieDetailsByTitle("stem").containsValue("The STEM Journals"));
+		    assertTrue(searchMovieDetailsByTitle("stem").containsValue("Activision: STEM - in the Videogame Industry"));
 
-			for (int i = 0; i <= jsonArray.length() - 1; i++) {
-				// advanced usage
-				if (jsonObject.getJSONObject("values").has("carbon.grid")) {
-
-					carbon_grid_daily = carbon_grid_daily
-							+ jsonArray.getJSONObject(i).getJSONObject("values").getDouble("carbon.grid");
-
-				}
-
-			}*/
-			
-			
-			assertTrue(Integer.parseInt(jsonObject.getString("totalResults")) >= 30);
-			logger.info("Completed Test Case "+ new Exception().getStackTrace()[0].getMethodName());
+			logger.info("***completed test case "+ new Exception().getStackTrace()[0].getMethodName());
 		}
 
-		
-		@Test(priority = 2, enabled = false, groups = { "sanity", "regression" })		
-		public void testSearchMovieDetailsEndpointByIMDBId() {
-			
-			logger.info("Starting Test Case "+ new Exception().getStackTrace()[0].getMethodName());			
-			jsonObject = getMovieDetailsByIMDbId("tt3896198");
-			assertTrue("Guardians of the Galaxy Vol. 2".equals(jsonObject.getString("Title")));
-			logger.info("Completed Test Case "+ new Exception().getStackTrace()[0].getMethodName());
+		/**
+		 * This Test Case verifies Release date and director name for 'Activision: STEM - in the Videogame Industry'
+		 */
+		@Test(priority = 2, enabled = true)		
+		public void testMovieDetailsByOMDBId() {
+			String movieId;
+			logger.info("***starting test case "+ new Exception().getStackTrace()[0].getMethodName());			
+			movieId = (String) getMovieIdFromTitle(searchMovieDetailsByTitle("stem"),"Activision: STEM - in the Videogame Industry");
+			jsonObject = getMovieDetailsByIMDbId(movieId);
+			assertTrue(jsonObject.getString("Released").equals("23 Nov 2010"));
+			assertTrue(jsonObject.getString("Director").equals("Mike Feurstein"));
+
+			logger.info("***completed test case "+ new Exception().getStackTrace()[0].getMethodName());
 
 		}
 		
-		@Test(priority = 3, enabled = false, groups = { "sanity", "regression" })		
+		/**
+		 * This Test Case verifies if response contains 'Science, Technology, Engineering and Math' 
+		 * and length of the movie 'The STEM Journals'
+		 */
+		@Test(priority = 3, enabled = true)		
 		public void testSearchMovieDetailsEndpointByTitle() {
 			
-			logger.info("Starting Test Case "+ new Exception().getStackTrace()[0].getMethodName());
+			logger.info("***starting test case "+ new Exception().getStackTrace()[0].getMethodName());
 			
-			jsonObject = getMovieDetailsByTitle("Guardians of the Galaxy Vol. 2");
-			assertTrue("Guardians of the Galaxy Vol. 2".equals(jsonObject.getString("Title")));
-			logger.info("Completed Test Case "+ new Exception().getStackTrace()[0].getMethodName());
+			response = getMovieDetailsByTitle("The STEM Journals");
+			assertTrue(response.asString().contains("Science, Technology, Engineering and Math"));
+			assertTrue(new JSONObject(response.asString()).getString("Runtime").equals("22 min"));
+			logger.info("***completed test case "+ new Exception().getStackTrace()[0].getMethodName());
 
 		}
 

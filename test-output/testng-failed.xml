@@ -3,11 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.stem.qa.automation.util.TestUtil">
+      <class name="com.stem.qa.automation.restapi.tests.OMDbEndpointsTester">
         <methods>
-          <include name="test"/>
+          <include name="testSearchMovieDetailsEndpointByTitle"/>
         </methods>
-      </class> <!-- com.stem.qa.automation.util.TestUtil -->
+      </class> <!-- com.stem.qa.automation.restapi.tests.OMDbEndpointsTester -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
