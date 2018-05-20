@@ -1,2 +1,1 @@
-2018-05-17 20:58:47 INFO  TestBase:22 - Starting Test Case testPeopleEndpointBySearchParameter
-2018-05-17 20:58:49 INFO  TestBase:39 - Ending Test Case testPeopleEndpointBySearchParameter
+2018-05-19 19:20:17 INFO  TestBase:52 - Running getAllMovieDetailsByTitleString

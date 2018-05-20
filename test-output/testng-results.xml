@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="3" total="4" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="2069" started-at="2018-05-18T03:58:46Z" finished-at="2018-05-18T03:58:49Z">
+  <suite name="Default suite" duration-ms="2158" started-at="2018-05-20T02:20:17Z" finished-at="2018-05-20T02:20:20Z">
     <groups>
-      <group name="regression">
-        <method signature="OMDbEndpointsTester.testPeopleEndpointBySearchParameter()[pri:1, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@3108bc]" name="testPeopleEndpointBySearchParameter" class="com.stem.qa.automation.restapi.tests.OMDbEndpointsTester"/>
-      </group> <!-- regression -->
-      <group name="sanity">
-        <method signature="OMDbEndpointsTester.testPeopleEndpointBySearchParameter()[pri:1, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@3108bc]" name="testPeopleEndpointBySearchParameter" class="com.stem.qa.automation.restapi.tests.OMDbEndpointsTester"/>
-      </group> <!-- sanity -->
+      <group name="restapi">
+        <method signature="TestUtil.test()[pri:1, instance:com.stem.qa.automation.util.TestUtil@6536e911]" name="test" class="com.stem.qa.automation.util.TestUtil"/>
+      </group> <!-- restapi -->
     </groups>
-    <test name="Default test" duration-ms="2069" started-at="2018-05-18T03:58:46Z" finished-at="2018-05-18T03:58:49Z">
-      <class name="com.stem.qa.automation.restapi.tests.OMDbEndpointsTester">
-        <test-method status="PASS" signature="testPeopleEndpointBySearchParameter()[pri:1, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@3108bc]" name="testPeopleEndpointBySearchParameter" duration-ms="2037" started-at="2018-05-18T03:58:47Z" finished-at="2018-05-18T03:58:49Z">
+    <test name="Default test" duration-ms="2158" started-at="2018-05-20T02:20:17Z" finished-at="2018-05-20T02:20:20Z">
+      <class name="com.stem.qa.automation.util.TestUtil">
+        <test-method status="PASS" signature="test()[pri:1, instance:com.stem.qa.automation.util.TestUtil@6536e911]" name="test" duration-ms="2140" started-at="2018-05-20T02:20:17Z" finished-at="2018-05-20T02:20:20Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testPeopleEndpointBySearchParameter -->
-      </class> <!-- com.stem.qa.automation.restapi.tests.OMDbEndpointsTester -->
+        </test-method> <!-- test -->
+      </class> <!-- com.stem.qa.automation.util.TestUtil -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -39,4 +39,11 @@ public class TestBase {
 		apiKey = prop.getProperty("apiKey");
 
 	}
+    public static String getBaseURI() {
+        return baseURI;
+    }
+    
+    public static String getAPIKey() {
+        return apiKey;
+    }
 }
