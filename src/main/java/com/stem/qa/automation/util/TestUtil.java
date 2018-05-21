@@ -40,17 +40,17 @@ public class TestUtil extends TestBase {
 			
 			logger.info("calling utility method "+ new Exception().getStackTrace()[0].getMethodName());		
 			response = given().contentType("application/json").params("s",movieTitleSearchString).params("apikey",getAPIKey()).when().get(getBaseURI());
+			
+			System.out.println(new JSONObject(response.asString()).getString("Response"));
 			//validates response code
 			//totalResults is total number of records as per search string
 			//totalResultsPerPage - max records shown per page. in this case 10
 			//Logic of if loop determines number of pages 
-			if (response.statusCode() == 200) {
+			if (response.statusCode() == 200 && new JSONObject(response.asString()).getString("Response").equals("True")) {
 				totalResults = Integer.parseInt(new JSONObject(response.asString()).getString("totalResults"));
 				totalResultsPerPage = new JSONObject(response.asString()).getJSONArray("Search").length();
-				if (totalResults == 0) {
-					logger.info("No results found");
-					return hmap;
-				} else if (totalResults <= 10) {
+
+				if (totalResults <= 10) {
 					totalPages = 1;
 				} else if (totalResults % totalResultsPerPage == 0) {
 					totalPages = totalResults / totalResultsPerPage; 
