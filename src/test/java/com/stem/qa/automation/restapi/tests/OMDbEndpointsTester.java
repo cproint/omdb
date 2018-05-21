@@ -24,7 +24,7 @@ public class OMDbEndpointsTester extends TestUtil {
 			
 			logger.info("***starting test case "+ new Exception().getStackTrace()[0].getMethodName());			
 
-			assertEquals(searchMovieDetailsByTitle("stem").size(),30);
+			assertTrue(searchMovieDetailsByTitle("stem").size() >= 30); 
 		    assertTrue(searchMovieDetailsByTitle("stem").containsValue("The STEM Journals"));
 		    assertTrue(searchMovieDetailsByTitle("stem").containsValue("Activision: STEM - in the Videogame Industry"));
 
