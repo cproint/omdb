@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="OMDB WebSite - Rest Endpoints" duration-ms="1807" started-at="2018-05-20T07:00:15Z" finished-at="2018-05-20T07:00:17Z">
+  <suite name="Default suite" duration-ms="1751" started-at="2018-05-21T05:01:28Z" finished-at="2018-05-21T05:01:30Z">
     <groups>
     </groups>
-    <test name="Rest Endpoints Tests" duration-ms="1807" started-at="2018-05-20T07:00:15Z" finished-at="2018-05-20T07:00:17Z">
+    <test name="Default test" duration-ms="1751" started-at="2018-05-21T05:01:28Z" finished-at="2018-05-21T05:01:30Z">
       <class name="com.stem.qa.automation.restapi.tests.OMDbEndpointsTester">
-        <test-method status="PASS" signature="testTotalUniqueMoviesAndMovieByTitle()[pri:1, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@335eadca]" name="testTotalUniqueMoviesAndMovieByTitle" duration-ms="1540" started-at="2018-05-20T07:00:15Z" finished-at="2018-05-20T07:00:17Z">
+        <test-method status="PASS" signature="testTotalUniqueMoviesAndMovieByTitle()[pri:1, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@335eadca]" name="testTotalUniqueMoviesAndMovieByTitle" duration-ms="1504" started-at="2018-05-21T05:01:28Z" finished-at="2018-05-21T05:01:30Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testTotalUniqueMoviesAndMovieByTitle -->
-        <test-method status="PASS" signature="testMovieDetailsByOMDBId()[pri:2, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@335eadca]" name="testMovieDetailsByOMDBId" duration-ms="213" started-at="2018-05-20T07:00:17Z" finished-at="2018-05-20T07:00:17Z">
+        <test-method status="PASS" signature="testMovieDetailsByOMDBId()[pri:2, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@335eadca]" name="testMovieDetailsByOMDBId" duration-ms="193" started-at="2018-05-21T05:01:30Z" finished-at="2018-05-21T05:01:30Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMovieDetailsByOMDBId -->
-        <test-method status="PASS" signature="testSearchMovieDetailsEndpointByTitle()[pri:3, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@335eadca]" name="testSearchMovieDetailsEndpointByTitle" duration-ms="32" started-at="2018-05-20T07:00:17Z" finished-at="2018-05-20T07:00:17Z">
+        <test-method status="PASS" signature="testSearchMovieDetailsEndpointByTitle()[pri:3, instance:com.stem.qa.automation.restapi.tests.OMDbEndpointsTester@335eadca]" name="testSearchMovieDetailsEndpointByTitle" duration-ms="34" started-at="2018-05-21T05:01:30Z" finished-at="2018-05-21T05:01:30Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSearchMovieDetailsEndpointByTitle -->
       </class> <!-- com.stem.qa.automation.restapi.tests.OMDbEndpointsTester -->
-    </test> <!-- Rest Endpoints Tests -->
-  </suite> <!-- OMDB WebSite - Rest Endpoints -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

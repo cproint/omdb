@@ -12,7 +12,7 @@ Java 8/ TestNG / RestAssured / log4j / Maven /IDE (Eclipse)
 
 3) com.stem.qa.automation.config: config.properties defines key-value pairs
 
-4) com.amsarmada.qa.automation.util: TestUtil.java contains common utility methodsand extends TestBase.java. Utility class contains common utility methods and are being called in test classes.
+4) com.stem.qa.automation.util: TestUtil.java contains common utility methodsand extends TestBase.java. Utility class contains common utility methods and are being called in test classes.
 
 5) log4j.properties is used as logging framework and is located under src/main/resources
   
